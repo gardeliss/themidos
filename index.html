@@ -25,6 +25,10 @@ h2{font-size:18px;font-weight:750;letter-spacing:-.5px}h3{font-weight:650}.badge
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 html{scroll-behavior:smooth;scroll-padding-top:18px}
 
+
+/* Keep the overlapping calendar above the decorative header. */
+header{z-index:0}
+main{position:relative;z-index:1}
 </style>
 </head>
 <body>
