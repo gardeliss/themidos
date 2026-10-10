@@ -50,7 +50,7 @@ main{position:relative;z-index:1}
 <section class="formsection"><h3>Ανακοινώσεις</h3><div id="editNotices"></div><form id="noticeForm"><label>Τίτλος<input name="title" required maxlength="120"></label><label>Κείμενο<textarea name="body" required maxlength="2000"></textarea></label><button class="action">Προσθήκη ανακοίνωσης</button></form></section>
 <section class="formsection"><h3>Έγγραφα πολυκατοικίας</h3><div id="editDocuments"></div><form id="documentForm"><label>Τίτλος εγγράφου<input name="title" required maxlength="120" placeholder="π.χ. Κανονισμός πολυκατοικίας"></label><label>Κατηγορία<input name="category" maxlength="80" placeholder="π.χ. Πρακτικά"></label><label>Αρχείο από τη συσκευή (προαιρετικό)<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx,.txt"></label><label>Σύνδεσμος ή διαδρομή αρχείου<input name="url" placeholder="π.χ. documents/kanonismos.pdf"></label><button class="action">Προσθήκη εγγράφου</button></form><p class="muted">Επιλέξτε αρχείο έως 5 MB ή βάλτε σύνδεσμο σε διαθέσιμο έγγραφο. Τα ανεβασμένα αρχεία θα είναι δημόσια.</p></section>
 <div class="savebar"><button class="action" id="refreshData" type="button">Ανανέωση κοινών στοιχείων</button><p class="muted" id="editorStatus" role="status"></p></div></dialog>
-<script src="store.js"></script>
+<script src="store.js?v=20261010-connection"></script>
 <script>
 'use strict';
 const data=JSON.parse(document.getElementById('site-data').textContent);
