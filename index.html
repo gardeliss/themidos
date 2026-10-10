@@ -29,29 +29,30 @@ html{scroll-behavior:smooth;scroll-padding-top:18px}
 /* Keep the overlapping calendar above the decorative header. */
 header{z-index:0}
 main{position:relative;z-index:1}
+
+[hidden]{display:none!important}
+.admin-add{margin-top:10px;color:#fff!important;text-decoration:none!important;font-size:15px!important;padding:14px 24px!important;background:#6059df!important}
+.admin-choices{display:grid;gap:10px;margin-top:16px}.choice{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:#f7f7ff;color:var(--ink);padding:16px;border-radius:14px;min-height:52px;font-weight:600}
+.back-choice{border:0;background:none;color:var(--green);padding:14px 0;min-height:44px}.admin-panel .action{margin-top:16px}.admin-panel .row>label{min-width:0}
+.publish-tools{display:grid;gap:12px}.publish-tools>a{color:var(--green);padding:8px 0;min-height:44px}.secondary{border:1px solid var(--line);background:#f7f8fc;color:var(--ink);padding:12px;border-radius:12px;min-height:44px}.draft-note{color:#8b6322!important}
 </style>
 </head>
 <body>
-<script id="site-data" type="application/json">{"name": "ΘΕΜΙΔΟΣ 18-20", "subtitle": "Ο κοινός μας χώρος ενημέρωσης", "demo": false, "image": "", "imageCaption": "Μια εικόνα για την πολυκατοικία μας", "events": [], "contacts": [{"name": "Μπάρκας Ανδρέας", "landline": "2109820648", "mobile": "6944436880", "type": "Συντήρηση ασανσέρ"}], "notices": [{"title": "Καλώς ήρθατε!", "body": "Εδώ θα βρίσκουμε τις επόμενες εργασίες, τις συναντήσεις μας και χρήσιμα τηλέφωνα. Αυτή είναι μια πρώτη ενδεικτική έκδοση."}], "documents": []}</script>
+<script id="site-data" type="application/json">{"name":"ΘΕΜΙΔΟΣ 18-20","subtitle":"Ο κοινός μας χώρος ενημέρωσης","demo":false,"image":"","imageCaption":"Μια εικόνα για την πολυκατοικία μας","events":[{"title":"Απεντόμωση","date":"2026-10-13","time":"18:00","description":""}],"contacts":[{"name":"Μπάρκας Ανδρέας","landline":"2109820648","mobile":"6944436880","type":"Συντήρηση ασανσέρ"}],"notices":[{"title":"Καλώς ήρθατε!","body":"Εδώ θα βρίσκουμε τις επόμενες εργασίες, τις συναντήσεις μας και χρήσιμα τηλέφωνα. Αυτή είναι μια πρώτη ενδεικτική έκδοση."}],"documents":[]}</script>
 <header><div><div class="eyebrow"><span class="brandmark" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h2m2 0h2M9 11h2m2 0h2M10 21v-6h4v6"/></svg></span>Η ΠΟΛΥΚΑΤΟΙΚΙΑ ΜΑΣ</div><h1 id="buildingName"></h1><p id="subtitle"></p><nav class="headerchips" aria-label="Γρήγορη πλοήγηση"><a href="#calendarSection">Ημερολόγιο</a><a href="#announcementsSection">Ανακοινώσεις</a><a href="#documentsSection">Έγγραφα</a></nav></div></header>
 <main>
-<section class="card" id="calendarSection" aria-label="Ημερολόγιο"><div class="row"><h2>Ημερολόγιο</h2><span class="badge" id="demoBadge">Πρώτη έκδοση</span></div><div class="row month"><button class="icon" id="prev" aria-label="Προηγούμενος μήνας">‹</button><h3 id="monthLabel" aria-live="polite"></h3><button class="icon" id="next" aria-label="Επόμενος μήνας">›</button></div><div class="week" aria-hidden="true"><span>ΔΕ</span><span>ΤΡ</span><span>ΤΕ</span><span>ΠΕ</span><span>ΠΑ</span><span>ΣΑ</span><span>ΚΥ</span></div><div class="grid" id="calendar"></div><button class="action" id="openEvent" type="button" style="width:100%;margin-top:16px">＋ Νέο συμβάν</button><p id="eventStatus" class="muted" role="status"></p><div class="events"><div class="row"><h3 id="eventsLabel">Επόμενα συμβάντα</h3><button id="resetDate" hidden class="icon" aria-label="Εμφάνιση επόμενων συμβάντων">↺</button></div><div id="eventList" aria-live="polite"></div></div></section>
+<section class="card" id="calendarSection" aria-label="Ημερολόγιο"><div class="row"><h2>Ημερολόγιο</h2><span class="badge" id="demoBadge">Πρώτη έκδοση</span></div><div class="row month"><button class="icon" id="prev" aria-label="Προηγούμενος μήνας">‹</button><h3 id="monthLabel" aria-live="polite"></h3><button class="icon" id="next" aria-label="Επόμενος μήνας">›</button></div><div class="week" aria-hidden="true"><span>ΔΕ</span><span>ΤΡ</span><span>ΤΕ</span><span>ΠΕ</span><span>ΠΑ</span><span>ΣΑ</span><span>ΚΥ</span></div><div class="grid" id="calendar"></div><div class="events"><div class="row"><h3 id="eventsLabel">Επόμενα συμβάντα</h3><button id="resetDate" hidden class="icon" aria-label="Εμφάνιση επόμενων συμβάντων">↺</button></div><div id="eventList" aria-live="polite"></div></div></section>
 <button class="card linkcard" id="openContacts"><span class="symbol" aria-hidden="true">☎</span><span><h2>Χρήσιμα τηλέφωνα</h2><span class="muted">Άνθρωποι &amp; συνεργεία · άμεση κλήση</span></span><span class="arrow" aria-hidden="true">›</span></button>
 <section class="card"><div class="row"><h2>Στην πολυκατοικία μας</h2><span class="badge">Εικόνα</span></div><div class="imagebox" id="imageBox"></div><p class="muted" id="imageCaption"></p></section>
-<section class="card" id="announcementsSection"><div class="row"><h2>Ανακοινώσεις</h2><span class="symbol" style="width:32px;height:32px;font-size:16px" aria-hidden="true">⌑</span></div><div id="notices"></div><button class="action" id="newNotice" type="button" style="margin-top:16px">＋ Νέα ανακοίνωση</button></section>
-<section class="card" id="documentsSection"><div class="row"><h2>Έγγραφα πολυκατοικίας</h2><span class="badge">Αρχεία</span></div><p class="muted">Κανονισμός, πρακτικά και χρήσιμα έγγραφα σε ένα σημείο.</p><div id="documents"></div><button class="action" id="newDocument" type="button" style="margin-top:16px">＋ Νέο έγγραφο</button></section>
+<section class="card" id="announcementsSection"><div class="row"><h2>Ανακοινώσεις</h2><span class="symbol" style="width:32px;height:32px;font-size:16px" aria-hidden="true">⌑</span></div><div id="notices"></div></section>
+<section class="card" id="documentsSection"><div class="row"><h2>Έγγραφα πολυκατοικίας</h2><span class="badge">Αρχεία</span></div><p class="muted">Κανονισμός, πρακτικά και χρήσιμα έγγραφα σε ένα σημείο.</p><div id="documents"></div></section>
 </main>
-<footer>Η πολυκατοικία μας, λίγο πιο οργανωμένη.<br><p id="sharedStatus" role="status"></p><button id="openEditor">Διαχείριση πολυκατοικίας</button></footer>
-<dialog id="eventDialog" aria-labelledby="newEventTitle"><div class="row top"><h2 id="newEventTitle">Νέο συμβάν</h2><button class="icon" data-close="eventDialog" aria-label="Κλείσιμο">×</button></div><form id="quickEventForm"><label>Τίτλος<input name="title" required maxlength="120" placeholder="π.χ. Συντήρηση ασανσέρ"></label><label>Ημερομηνία<input name="date" type="date" required></label><label>Ώρα (προαιρετικά)<input name="time" type="time"></label><label>Λεπτομέρειες<textarea name="description" maxlength="250"></textarea></label><p class="tip">Με την προσθήκη το συμβάν αποθηκεύεται στο κοινό website.</p><p id="quickStatus" class="muted" role="status"></p><button class="action" style="width:100%;margin-top:16px">Προσθήκη συμβάντος</button></form></dialog>
-<dialog id="contactsDialog"><div class="row top"><h2>Χρήσιμα τηλέφωνα</h2><button class="icon" data-close="contactsDialog" aria-label="Κλείσιμο">×</button></div><p class="muted">Πατήστε έναν αριθμό για να καλέσετε.</p><table><thead><tr><th>ΟΝΟΜΑ</th><th>ΣΤΑΘΕΡΟ</th><th>ΚΙΝΗΤΟ</th><th>ΧΑΡΑΚΤΗΡΙΣΜΟΣ</th></tr></thead><tbody id="contactsList"></tbody></table><button class="action" id="newContact" type="button" style="margin-top:16px">＋ Νέο τηλέφωνο</button></dialog>
-<dialog id="editorDialog"><div class="row top"><h2>Διαχείριση πολυκατοικίας</h2><button class="icon" data-close="editorDialog" aria-label="Κλείσιμο">×</button></div><p class="tip">Οι αλλαγές αποθηκεύονται στο κοινό website με κάθε προσθήκη ή εφαρμογή. Απαιτείται σύνδεση διαχειριστή. Το website και τα αρχεία του είναι δημόσια.</p><section id="adminConnection"><h3>Σύνδεση διαχειριστή</h3><p id="loginHelp" class="muted">Μία αρχική ρύθμιση: στο GitHub δημιουργήστε fine-grained token με Resource owner: gardeliss, Only select repositories: themidos και Repository permissions → Contents: Read and write. Ορίστε ημερομηνία λήξης. Το κλειδί κρατιέται μόνο όσο παραμένει ανοιχτή η σελίδα. Μην το στείλετε σε μήνυμα.</p><a id="tokenLink" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Δημιουργία κλειδιού στο GitHub ↗</a><form id="connectForm"><label><span id="loginLabel">Κλειδί πρόσβασης</span><input id="adminToken" type="password" autocomplete="off" required></label><button class="action" style="margin-top:12px">Σύνδεση</button></form><button id="disconnect" type="button" hidden>Αποσύνδεση</button><p id="connectionStatus" role="status" class="muted"></p></section><form id="settingsForm"><label>Τίτλος<input id="editName" required maxlength="80"></label><label>Υπότιτλος<input id="editSubtitle" maxlength="160"></label><label>Εικόνα: HTTPS link ή διαδρομή αρχείου<input id="editImage" placeholder="π.χ. building.jpg"></label><label>Λεζάντα<input id="editCaption" maxlength="200"></label><button class="action" style="margin-top:12px">Εφαρμογή στοιχείων</button></form>
-<section class="formsection"><h3>Συμβάντα</h3><div id="editEvents"></div><form id="eventForm"><label>Τίτλος<input name="title" required maxlength="120" placeholder="π.χ. Συντήρηση ανελκυστήρα"></label><div class="row"><label style="flex:1">Ημερομηνία<input name="date" type="date" required></label><label style="flex:1">Ώρα (προαιρετικά)<input name="time" type="time"></label></div><label>Λεπτομέρειες<input name="description" maxlength="250"></label><button class="action">Προσθήκη συμβάντος</button></form></section>
-<section class="formsection"><h3>Επαφές</h3><div id="editContacts"></div><form id="contactForm"><label>Όνομα<input name="name" required maxlength="80"></label><label>Σταθερό<input name="landline" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Κινητό<input name="mobile" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Χαρακτηρισμός<input name="type" required maxlength="80" placeholder="π.χ. Υδραυλικός"></label><button class="action">Προσθήκη επαφής</button></form></section>
-<section class="formsection"><h3>Ανακοινώσεις</h3><div id="editNotices"></div><form id="noticeForm"><label>Τίτλος<input name="title" required maxlength="120"></label><label>Κείμενο<textarea name="body" required maxlength="2000"></textarea></label><button class="action">Προσθήκη ανακοίνωσης</button></form></section>
-<section class="formsection"><h3>Έγγραφα πολυκατοικίας</h3><div id="editDocuments"></div><form id="documentForm"><label>Τίτλος εγγράφου<input name="title" required maxlength="120" placeholder="π.χ. Κανονισμός πολυκατοικίας"></label><label>Κατηγορία<input name="category" maxlength="80" placeholder="π.χ. Πρακτικά"></label><label>Αρχείο από τη συσκευή (προαιρετικό)<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx,.txt"></label><label>Σύνδεσμος ή διαδρομή αρχείου<input name="url" placeholder="π.χ. documents/kanonismos.pdf"></label><button class="action">Προσθήκη εγγράφου</button></form><p class="muted">Επιλέξτε αρχείο έως 5 MB ή βάλτε σύνδεσμο σε διαθέσιμο έγγραφο. Τα ανεβασμένα αρχεία θα είναι δημόσια.</p></section>
-<div class="savebar"><button class="action" id="refreshData" type="button">Ανανέωση κοινών στοιχείων</button><p class="muted" id="editorStatus" role="status"></p></div></dialog>
-<script src="config.js?v=20261010-password"></script>
-<script src="store.js?v=20261010-password"></script>
+<footer>Η πολυκατοικία μας, λίγο πιο οργανωμένη.<br><p id="sharedStatus" role="status"></p><button class="action admin-add" id="openEditor" type="button">＋ Προσθήκη · Admin</button></footer>
+
+<dialog id="contactsDialog"><div class="row top"><h2>Χρήσιμα τηλέφωνα</h2><button class="icon" data-close="contactsDialog" aria-label="Κλείσιμο">×</button></div><p class="muted">Πατήστε έναν αριθμό για να καλέσετε.</p><table><thead><tr><th>ΟΝΟΜΑ</th><th>ΣΤΑΘΕΡΟ</th><th>ΚΙΝΗΤΟ</th><th>ΧΑΡΑΚΤΗΡΙΣΜΟΣ</th></tr></thead><tbody id="contactsList"></tbody></table></dialog>
+<dialog id="editorDialog" aria-labelledby="adminTitle"><div class="row top"><h2 id="adminTitle">Προσθήκη · Admin</h2><button class="icon" data-close="editorDialog" aria-label="Κλείσιμο">×</button></div>
+<section id="adminConnection"><p class="muted">Βάλε τον κωδικό διαχείρισης για να συνεχίσεις.</p><form id="connectForm"><label>Κωδικός<input id="adminPassword" type="password" autocomplete="current-password" inputmode="numeric" required></label><button class="action" style="margin-top:12px">Σύνδεση</button></form><p id="connectionStatus" class="muted" role="status"></p></section>
+<div id="adminTools" hidden><p class="tip">Οι αλλαγές αποθηκεύονται σε αυτή τη συσκευή ως προσχέδιο. Για να τις δουν όλοι, κατέβασε το data.json και ανέβασέ το στο GitHub.</p><div id="addChooser"><h3>Τι θέλεις να προσθέσεις;</h3><div class="admin-choices"><button type="button" class="choice" data-kind="events">Ημερολόγιο<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="contacts">Επαφή<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="notices">Ανακοίνωση<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="documents">Έγγραφο<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="settings">Εικόνα / στοιχεία<span aria-hidden="true">›</span></button></div></div><section class="admin-panel" id="panel-events" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Ημερολόγιο</h3><form id="eventForm"><label>Τίτλος<input name="title" required maxlength="120" placeholder="π.χ. Συντήρηση ανελκυστήρα"></label><div class="row"><label style="flex:1">Ημερομηνία<input name="date" type="date" required></label><label style="flex:1">Ώρα (προαιρετικά)<input name="time" type="time"></label></div><label>Λεπτομέρειες<input name="description" maxlength="250"></label><button class="action">Προσθήκη συμβάντος</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editEvents"></div></div></section><section class="admin-panel" id="panel-contacts" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Επαφή</h3><form id="contactForm"><label>Όνομα<input name="name" required maxlength="80"></label><label>Σταθερό<input name="landline" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Κινητό<input name="mobile" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Χαρακτηρισμός<input name="type" required maxlength="80" placeholder="π.χ. Υδραυλικός"></label><button class="action">Προσθήκη επαφής</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editContacts"></div></div></section><section class="admin-panel" id="panel-notices" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Ανακοίνωση</h3><form id="noticeForm"><label>Τίτλος<input name="title" required maxlength="120"></label><label>Κείμενο<textarea name="body" required maxlength="2000"></textarea></label><button class="action">Προσθήκη ανακοίνωσης</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editNotices"></div></div></section><section class="admin-panel" id="panel-documents" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Έγγραφο</h3><form id="documentForm"><label>Τίτλος εγγράφου<input name="title" required maxlength="120" placeholder="π.χ. Κανονισμός πολυκατοικίας"></label><label>Κατηγορία<input name="category" maxlength="80" placeholder="π.χ. Πρακτικά"></label><label>Αρχείο από τη συσκευή (έως 1 MB)<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx,.txt"></label><label>Σύνδεσμος ή διαδρομή αρχείου<input name="url" placeholder="π.χ. documents/kanonismos.pdf"></label><button class="action">Προσθήκη εγγράφου</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editDocuments"></div></div></section><section class="admin-panel" id="panel-settings" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Εικόνα / στοιχεία</h3><form id="settingsForm"><label>Τίτλος<input id="editName" required maxlength="80"></label><label>Υπότιτλος<input id="editSubtitle" maxlength="160"></label><label>Εικόνα: HTTPS link ή διαδρομή αρχείου<input id="editImage" placeholder="π.χ. building.jpg"></label><label>Ή φωτογραφία από τη συσκευή (έως 1 MB)<input id="imageFile" type="file" accept=".png,.jpg,.jpeg,.webp"></label><label>Λεζάντα<input id="editCaption" maxlength="200"></label><button class="action" style="margin-top:12px">Εφαρμογή στοιχείων</button></form></section><p class="muted" id="editorStatus" role="status"></p><section class="formsection publish-tools"><h3>Δημοσίευση αλλαγών</h3><button class="action" id="exportData" type="button">Λήψη data.json</button><a href="https://github.com/gardeliss/themidos/upload/main" target="_blank" rel="noopener noreferrer">Άνοιγμα GitHub για ανέβασμα ↗</a><p class="muted">Ανέβασε το αρχείο με όνομα <strong>data.json</strong> στη θέση του υπάρχοντος και πάτησε Commit changes. Αν το κινητό το ονομάσει data (1).json, μετονόμασέ το πρώτα σε data.json.</p><button class="secondary" id="refreshData" type="button">Φόρτωση κοινών στοιχείων</button><button class="secondary" id="disconnect" type="button">Αποσύνδεση</button></section></div></dialog>
 <script>
 'use strict';
 const data=JSON.parse(document.getElementById('site-data').textContent);
@@ -64,37 +65,163 @@ function render(){
  $('buildingName').textContent=data.name;$('subtitle').textContent=data.subtitle;document.title=data.name;$('demoBadge').textContent=data.demo?'Πρώτη έκδοση':'Κοινή ενημέρωση';
  $('monthLabel').textContent=month.toLocaleDateString('el-GR',{month:'long',year:'numeric'});$('calendar').replaceChildren();
  const offset=(month.getDay()+6)%7;for(let i=0;i<offset;i++)$('calendar').append(node('span'));
- const count=new Date(month.getFullYear(),month.getMonth()+1,0).getDate();for(let i=1;i<=count;i++){const d=new Date(month.getFullYear(),month.getMonth(),i),key=dateKey(d),b=node('button',String(i),'day'+(key===today?' today':'')+(key===selected?' selected':''));b.type='button';b.setAttribute('aria-label',d.toLocaleDateString('el-GR',{day:'numeric',month:'long',year:'numeric'}));b.setAttribute('aria-pressed',String(key===selected));if(key===today)b.setAttribute('aria-current','date');if(data.events.some(e=>e.date===key))b.append(node('span',undefined,'dot'));b.onclick=()=>{selected=key;render();};$('calendar').append(b);}
+ const count=new Date(month.getFullYear(),month.getMonth()+1,0).getDate();for(let i=1;i<=count;i++){const d=new Date(month.getFullYear(),month.getMonth(),i),key=dateKey(d),b=node('button',String(i),'day'+(key===today?' today':'')+(key===selected?' selected':''));b.type='button';b.setAttribute('aria-label',d.toLocaleDateString('el-GR',{day:'numeric',month:'long',year:'numeric'}));b.setAttribute('aria-pressed',String(key===selected));if(key===today)b.setAttribute('aria-current','date');if(data.events.some(e=>e.date===key))b.append(node('span',undefined,'dot'));b.onclick=()=>{selected=key;render();updateStatus();};$('calendar').append(b);}
  $('resetDate').hidden=!selected;$('eventsLabel').textContent=selected?new Date(selected+'T12:00').toLocaleDateString('el-GR',{day:'numeric',month:'long'}):'Επόμενα συμβάντα';$('eventList').replaceChildren();
  const events=data.events.filter(e=>selected?e.date===selected:e.date>=today).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||''))).slice(0,selected?100:5);
  if(!events.length)$('eventList').append(node('div',selected?'Δεν υπάρχει συμβάν για αυτή την ημέρα.':'Δεν έχουν προστεθεί επόμενα συμβάντα.','empty'));
  for(const e of events){const d=new Date(e.date+'T12:00'),r=node('div',undefined,'event'),box=node('div',String(d.getDate()),'datebox');box.append(node('small',d.toLocaleDateString('el-GR',{month:'short'})));const content=node('div');content.append(node('h3',e.title));if(e.time)content.append(node('p',e.time));if(e.description)content.append(node('p',e.description));r.append(box,content);$('eventList').append(r);}
  $('contactsList').replaceChildren();for(const c of data.contacts){const tr=node('tr');tr.append(node('td',c.name));for(const key of ['landline','mobile']){const td=node('td');if(c[key]){const a=node('a',c[key]);a.href='tel:'+c[key].replace(/[^+0-9]/g,'');a.setAttribute('aria-label','Κλήση '+(key==='landline'?'σταθερού':'κινητού')+': '+c.name);td.append(a);}else td.textContent='—';tr.append(td);}tr.append(node('td',c.type));$('contactsList').append(tr);}if(!data.contacts.length){const tr=node('tr'),td=node('td','Δεν έχουν προστεθεί επαφές.');td.colSpan=4;tr.append(td);$('contactsList').append(tr);}
- $('imageBox').replaceChildren();if(data.image){const im=node('img');im.alt=data.imageCaption||'Εικόνα πολυκατοικίας';im.src=data.image;im.loading='lazy';im.onerror=()=>{$('imageBox').replaceChildren(node('p','Η εικόνα δεν είναι διαθέσιμη.'));};$('imageBox').append(im);}else $('imageBox').append(node('div','⌂'),node('p','Εδώ μπορεί να μπει φωτογραφία του κτιρίου ή μια χρήσιμη αφίσα.'));$('imageCaption').textContent=data.image?data.imageCaption:'';
- $('documents').replaceChildren();for(const doc of data.documents){if(!doc.url||!safeImage(doc.url))continue;const a=node('a',undefined,'documentlink'),symbol=node('span','▤','symbol'),body=node('span');body.append(node('h3',doc.title),node('span',doc.category||'Έγγραφο','muted'));a.href=doc.url;a.target='_blank';a.rel='noopener noreferrer';a.append(symbol,body,node('span','↗','arrow'));$('documents').append(a);}if(!data.documents.length)$('documents').append(node('p','Δεν έχουν προστεθεί έγγραφα ακόμη.','empty'));
+ $('imageBox').replaceChildren();if(data.image&&(safeImage(data.image)||imageData(data.image))){const im=node('img');im.alt=data.imageCaption||'Εικόνα πολυκατοικίας';im.src=data.image;im.loading='lazy';im.onerror=()=>{$('imageBox').replaceChildren(node('p','Η εικόνα δεν είναι διαθέσιμη.'));};$('imageBox').append(im);}else $('imageBox').append(node('div','⌂'),node('p','Εδώ μπορεί να μπει φωτογραφία του κτιρίου ή μια χρήσιμη αφίσα.'));$('imageCaption').textContent=data.image?data.imageCaption:'';
+ for(const url of documentBlobs)URL.revokeObjectURL(url);documentBlobs.length=0;$('documents').replaceChildren();for(const doc of data.documents){const href=documentHref(doc);if(!href)continue;const a=node('a',undefined,'documentlink'),symbol=node('span','▤','symbol'),body=node('span');body.append(node('h3',doc.title),node('span',(doc.category||'Έγγραφο')+(doc.fileData?' · Λήψη αρχείου':''),'muted'));a.href=href;if(doc.fileData)a.download=doc.fileName||'document';a.target='_blank';a.rel='noopener noreferrer';a.append(symbol,body,node('span','↗','arrow'));$('documents').append(a);}if(!data.documents.length)$('documents').append(node('p','Δεν έχουν προστεθεί έγγραφα ακόμη.','empty'));
  $('notices').replaceChildren();for(const n of data.notices){const item=node('article',undefined,'notice');item.append(node('h3',n.title),node('p',n.body));$('notices').append(item);}if(!data.notices.length)$('notices').append(node('p','Δεν υπάρχουν ανακοινώσεις.','empty'));
 }
-const store=new BuildingStore();let ready=false,working=false;
-function syncConnection(){$('connectForm').hidden=!!store.token;$('disconnect').hidden=!store.token;}
-if(store.passwordMode){$('documentForm').elements.file.insertAdjacentHTML('afterend','<small class="muted">Έως 1 MB. Για μεγαλύτερο αρχείο συμπληρώστε HTTPS σύνδεσμο.</small>');$('loginHelp').textContent='Βάλτε τον κωδικό διαχείρισης που όρισες στο Cloudflare. Η σύνδεση διαρκεί έως 12 ώρες και διατηρείται στην ανανέωση της καρτέλας. Οι αλλαγές και τα αρχεία είναι δημόσια.';$('tokenLink').hidden=true;$('loginLabel').textContent='Κωδικός διαχείρισης';$('adminToken').autocomplete='current-password';}
-syncConnection();
-function editLists(){for(const [key,id,label] of [['events','editEvents',e=>e.date+' · '+e.title],['contacts','editContacts',c=>c.name+' · '+c.type],['notices','editNotices',n=>n.title],['documents','editDocuments',d=>d.title]]){$(id).replaceChildren();data[key].forEach((item,i)=>{const row=node('div',undefined,'editoritem'),b=node('button','Διαγραφή','remove');b.type='button';b.disabled=working;b.onclick=()=>persist(candidate=>candidate[key].splice(i,1),$('editorStatus'));row.append(node('span',label(item)),b);$(id).append(row);});}}
-function apply(value){for(const key of Object.keys(data))delete data[key];Object.assign(data,value);render();editLists();}
-function setBusy(value){working=value;for(const id of ['settingsForm','eventForm','contactForm','noticeForm','documentForm','quickEventForm','connectForm'])for(const button of $(id).querySelectorAll('button'))button.disabled=value;editLists();}
-async function persist(update,status){if(working)return false;if(!ready||!store.token){status.textContent='Συνδεθείτε ως διαχειριστής πριν αποθηκεύσετε.';return false;}setBusy(true);status.textContent='Αποθήκευση…';try{const candidate=structuredClone(data);await update(candidate);candidate.demo=false;await store.save(candidate);apply(candidate);status.textContent='Αποθηκεύτηκε στο κοινό website.';$('sharedStatus').textContent='Τα κοινά στοιχεία ενημερώθηκαν.';return true;}catch(e){status.textContent=e.message;return false;}finally{setBusy(false);syncConnection();}}
-async function refresh(){if(working)return;setBusy(true);try{apply(await store.load());ready=true;$('sharedStatus').textContent='Τα κοινά στοιχεία φορτώθηκαν.';$('editorStatus').textContent='Φορτώθηκαν τα πιο πρόσφατα στοιχεία.';}catch(e){$('sharedStatus').textContent=e.message;$('editorStatus').textContent=e.message;}finally{setBusy(false);syncConnection();}}
-function openEditor(formId){for(const [id,key] of [['editName','name'],['editSubtitle','subtitle'],['editImage','image'],['editCaption','imageCaption']])$(id).value=data[key];editLists();if(!$('editorDialog').open)$('editorDialog').showModal();const target=store.token?(formId?$(formId):$('settingsForm')):$('adminConnection');target.scrollIntoView({block:'start'});}
+// Simple client-side gate, deliberately embedded as requested by the owner.
+const ADMIN_PASSWORD='6944584361';
+const DRAFT_KEY='themidos-local-draft-v1';
+const SESSION_KEY='themidos-simple-admin';
+let authenticated=false,working=false,hasDraft=false,publicSnapshot=null;
+try{authenticated=sessionStorage.getItem(SESSION_KEY)==='yes';}catch{}
+function validData(value){return value&&typeof value==='object'&&typeof value.name==='string'&&typeof value.subtitle==='string'&&['events','contacts','notices','documents'].every(key=>Array.isArray(value[key]));}
+class DraftStore{
+ constructor(storage){this.storage=storage;}
+ read(){try{const value=JSON.parse(this.storage.getItem(DRAFT_KEY));return value&&validData(value.data)?value:null;}catch{return null;}}
+ save(value){try{this.storage.setItem(DRAFT_KEY,JSON.stringify({data:value,base:publicSnapshot}));}catch{throw new Error('Η συσκευή δεν μπόρεσε να αποθηκεύσει. Δοκιμάστε μικρότερο αρχείο ή κανονική καρτέλα Chrome.');}}
+ clear(){this.storage.removeItem(DRAFT_KEY);}
+}
+let storage;try{storage=localStorage;}catch{storage={getItem(){return null;},setItem(){throw Error();},removeItem(){}};}
+const store=new DraftStore(storage);
+function syncConnection(){
+ $('adminConnection').hidden=authenticated;$('adminTools').hidden=!authenticated;
+}
+function editLists(){
+ for(const [key,id,label] of [['events','editEvents',e=>e.date+' · '+e.title],['contacts','editContacts',c=>c.name+' · '+c.type],['notices','editNotices',n=>n.title],['documents','editDocuments',d=>d.title]]){
+  $(id).replaceChildren();
+  data[key].forEach((item,i)=>{const row=node('div',undefined,'editoritem'),b=node('button','Διαγραφή','remove');b.type='button';b.disabled=working;b.onclick=()=>persist(candidate=>candidate[key].splice(i,1));row.append(node('span',label(item)),b);$(id).append(row);});
+ }
+}
+function apply(value){for(const key of Object.keys(data))delete data[key];Object.assign(data,value);render();editLists();syncConnection();}
+function updateStatus(message){
+ $('sharedStatus').textContent=message|| (hasDraft?'Τοπικό προσχέδιο · οι αλλαγές περιμένουν ανέβασμα στο GitHub.':'Κοινά στοιχεία πολυκατοικίας.');
+ $('sharedStatus').classList.toggle('draft-note',hasDraft);
+ $('demoBadge').textContent=hasDraft?'Τοπικό προσχέδιο':'Κοινή ενημέρωση';
+}
+function setBusy(value){
+ working=value;
+ for(const id of ['settingsForm','eventForm','contactForm','noticeForm','documentForm','connectForm'])for(const button of $(id).querySelectorAll('button'))button.disabled=value;
+ $('exportData').disabled=value;$('refreshData').disabled=value;$('disconnect').disabled=value;
+ for(const button of document.querySelectorAll('[data-kind],.back-choice'))button.disabled=value;
+ editLists();
+}
+async function persist(update){
+ if(working)return false;
+ if(!authenticated){$('editorStatus').textContent='Βάλε πρώτα τον κωδικό διαχείρισης.';return false;}
+ setBusy(true);
+ try{
+  const candidate=structuredClone(data);await update(candidate);candidate.demo=false;
+  store.save(candidate);hasDraft=true;apply(candidate);updateStatus();
+  $('editorStatus').textContent='Αποθηκεύτηκε στη συσκευή. Κατέβασε το data.json για δημοσίευση σε όλους.';
+  return true;
+ }catch(error){$('editorStatus').textContent=error.message;return false;}
+ finally{setBusy(false);}
+}
+async function fetchPublic(){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
+ try{
+  const response=await fetch('./data.json?t='+Date.now(),{cache:'no-store',signal:controller.signal});
+  if(!response.ok)throw Error();const value=await response.json();if(!validData(value))throw Error();return value;
+ }finally{clearTimeout(timer);}
+}
+async function initialize(){
+ let latest;
+ try{latest=await fetchPublic();publicSnapshot=JSON.stringify(latest);}catch{latest=structuredClone(data);}
+ const draft=store.read();
+ if(draft&&JSON.stringify(draft.data)===JSON.stringify(latest)){try{store.clear();}catch{}}
+ else if(draft){hasDraft=true;apply(draft.data);updateStatus(draft.base&&publicSnapshot&&draft.base!==publicSnapshot?'Υπάρχουν νεότερα κοινά στοιχεία. Το τοπικό σου προσχέδιο διατηρήθηκε. Φόρτωσε τα κοινά στοιχεία πριν κάνεις νέες αλλαγές.':undefined);return;}
+ apply(latest);updateStatus(publicSnapshot?undefined:'Δεν φορτώθηκαν τα νεότερα κοινά στοιχεία. Προβάλλεται η διαθέσιμη έκδοση.');
+}
+function choose(kind){
+ if(!authenticated)return;
+ for(const panel of document.querySelectorAll('.admin-panel'))panel.hidden=panel.id!=='panel-'+kind;
+ $('addChooser').hidden=true;$('editorStatus').textContent='';
+ if(kind==='events')$('eventForm').elements.date.value=selected||today;
+ if(kind==='settings')for(const [id,key] of [['editName','name'],['editSubtitle','subtitle'],['editImage','image'],['editCaption','imageCaption']])$(id).value=data[key]?.startsWith?.('data:')?'':data[key]||'';
+ const panel=$('panel-'+kind);panel.scrollIntoView({block:'start'});panel.querySelector('input')?.focus();
+}
+function showChooser(){for(const panel of document.querySelectorAll('.admin-panel'))panel.hidden=true;$('addChooser').hidden=false;$('editorStatus').textContent='';if(authenticated&&$('editorDialog').open)$('addChooser').scrollIntoView({block:'start'});}
 function safeImage(s){return !s||/^https:\/\//i.test(s)||/^(?!\/\/)(?![a-z][a-z0-9+.-]*:)[^\\<>]+$/i.test(s);}
- $('prev').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);selected=null;render();};$('next').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);selected=null;render();};$('resetDate').onclick=()=>{selected=null;render();};
-$('openContacts').onclick=()=>$('contactsDialog').showModal();$('openEditor').onclick=()=>openEditor();document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
-$('newContact').onclick=()=>{$('contactsDialog').close();openEditor('contactForm');};$('newNotice').onclick=()=>openEditor('noticeForm');$('newDocument').onclick=()=>openEditor('documentForm');
-$('connectForm').onsubmit=async e=>{e.preventDefault();if(working)return;setBusy(true);$('connectionStatus').textContent='Έλεγχος πρόσβασης…';try{await store.connect($('adminToken').value);apply(await store.load());ready=true;$('adminToken').value='';$('connectForm').hidden=true;$('disconnect').hidden=false;$('connectionStatus').textContent='Συνδεθήκατε. Μπορείτε να αποθηκεύετε κοινές αλλαγές.';}catch(error){store.disconnect();$('connectionStatus').textContent=error.message;}finally{setBusy(false);syncConnection();}};
-$('disconnect').onclick=()=>{store.disconnect();$('connectForm').hidden=false;$('disconnect').hidden=true;$('connectionStatus').textContent='Αποσυνδεθήκατε.';};$('refreshData').onclick=refresh;
-$('settingsForm').onsubmit=async e=>{e.preventDefault();if(!safeImage($('editImage').value.trim())){$('editorStatus').textContent='Χρησιμοποιήστε HTTPS link ή διαδρομή εικόνας.';return;}await persist(candidate=>{candidate.name=$('editName').value.trim()||'Η πολυκατοικία μας';candidate.subtitle=$('editSubtitle').value.trim();candidate.image=$('editImage').value.trim();candidate.imageCaption=$('editCaption').value.trim();},$('editorStatus'));};
-for(const [id,key] of [['eventForm','events'],['contactForm','contacts'],['noticeForm','notices'],['documentForm','documents']])$(id).onsubmit=async e=>{e.preventDefault();const form=e.target,item={};for(const [k,v] of new FormData(form))if(typeof v==='string')item[k]=v.trim();if(key==='contacts'&&!item.landline&&!item.mobile){$('editorStatus').textContent='Συμπληρώστε τουλάχιστον έναν αριθμό.';return;}const file=key==='documents'?form.elements.file.files[0]:null;if(key==='documents'&&(!file&&!item.url||item.url&&!safeImage(item.url))){$('editorStatus').textContent='Επιλέξτε αρχείο ή έγκυρο HTTPS σύνδεσμο / διαδρομή.';return;}const ok=await persist(async candidate=>{if(file)item.url=await store.upload(file);candidate[key].push(item);},$('editorStatus'));if(ok)form.reset();};
-$('openEvent').onclick=()=>{if(!store.token){openEditor('eventForm');return;}const form=$('quickEventForm');form.reset();form.elements.date.value=selected||today;$('quickStatus').textContent='';$('eventDialog').showModal();form.elements.title.focus();};
-$('quickEventForm').onsubmit=async e=>{e.preventDefault();const form=e.target,item=Object.fromEntries(new FormData(form));for(const k of Object.keys(item))item[k]=item[k].trim();if(!item.title){$('quickStatus').textContent='Συμπληρώστε τίτλο συμβάντος.';return;}if(await persist(candidate=>candidate.events.push(item),$('quickStatus'))){selected=item.date;const d=new Date(item.date+'T12:00');month=new Date(d.getFullYear(),d.getMonth(),1);render();form.reset();form.elements.date.value=selected;$('eventStatus').textContent='Το συμβάν αποθηκεύτηκε στο κοινό website.';$('eventDialog').close();}};
-render();refresh();
+function imageData(s){return typeof s==='string'&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(s);}
+const mimeTypes={pdf:'application/pdf',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',txt:'text/plain'};
+const documentBlobs=[];
+function documentHref(doc){
+ if(doc.fileData){
+  const match=/^data:([^;,]+);base64,([A-Za-z0-9+/=]+)$/.exec(doc.fileData);
+  if(!match||!Object.values(mimeTypes).includes(match[1]))return null;
+  try{const bytes=Uint8Array.from(atob(match[2]),c=>c.charCodeAt(0)),url=URL.createObjectURL(new Blob([bytes],{type:match[1]}));documentBlobs.push(url);return url;}catch{return null;}
+ }
+ return doc.url&&safeImage(doc.url)?doc.url:null;
+}
+async function fileData(file,imageOnly=false){
+ if(file.size>1024*1024)throw new Error('Μέγιστο μέγεθος αρχείου: 1 MB. Για μεγαλύτερο αρχείο χρησιμοποίησε HTTPS σύνδεσμο.');
+ if(!file.size)throw new Error('Το αρχείο είναι κενό.');
+ const ext=file.name.split('.').pop().toLowerCase(),mime=mimeTypes[ext];
+ if(!mime||imageOnly&&!['png','jpg','jpeg','webp'].includes(ext))throw new Error('Επίλεξε υποστηριζόμενο τύπο αρχείου.');
+ const bytes=new Uint8Array(await file.arrayBuffer());let binary='';
+ for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
+ return 'data:'+mime+';base64,'+btoa(binary);
+}
+$('prev').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);selected=null;render();updateStatus();};
+$('next').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);selected=null;render();updateStatus();};
+$('resetDate').onclick=()=>{selected=null;render();updateStatus();};
+$('openContacts').onclick=()=>$('contactsDialog').showModal();
+$('openEditor').onclick=()=>{showChooser();syncConnection();$('editorDialog').showModal();if(!authenticated)$('adminPassword').focus();};
+document.querySelectorAll('[data-close]').forEach(button=>button.onclick=()=>$(button.dataset.close).close());
+document.querySelectorAll('[data-kind]').forEach(button=>button.onclick=()=>choose(button.dataset.kind));
+document.querySelectorAll('.back-choice').forEach(button=>button.onclick=showChooser);
+$('connectForm').onsubmit=event=>{
+ event.preventDefault();
+ if($('adminPassword').value!==ADMIN_PASSWORD){$('connectionStatus').textContent='Λάθος κωδικός. Δοκίμασε ξανά.';return;}
+ authenticated=true;$('adminPassword').value='';$('connectionStatus').textContent='';
+ try{sessionStorage.setItem(SESSION_KEY,'yes');}catch{}syncConnection();showChooser();
+};
+$('disconnect').onclick=()=>{authenticated=false;try{sessionStorage.removeItem(SESSION_KEY);}catch{}syncConnection();showChooser();$('adminPassword').focus();};
+$('settingsForm').onsubmit=async event=>{
+ event.preventDefault();
+ const image=$('editImage').value.trim(),file=$('imageFile').files[0];
+ if(!safeImage(image)){$('editorStatus').textContent='Χρησιμοποίησε HTTPS σύνδεσμο ή διαδρομή εικόνας.';return;}
+ const ok=await persist(async candidate=>{
+  candidate.name=$('editName').value.trim()||'ΘΕΜΙΔΟΣ 18-20';candidate.subtitle=$('editSubtitle').value.trim();
+  candidate.image=file?await fileData(file,true):(image||imageData(data.image)&&data.image||'');
+  candidate.imageCaption=$('editCaption').value.trim();
+ });
+ if(ok)$('imageFile').value='';
+};
+for(const [id,key] of [['eventForm','events'],['contactForm','contacts'],['noticeForm','notices'],['documentForm','documents']]){
+ $(id).onsubmit=async event=>{
+  event.preventDefault();const form=event.target,item={};
+  for(const [key,value] of new FormData(form))if(typeof value==='string')item[key]=value.trim();
+  if(key==='contacts'&&!item.landline&&!item.mobile){$('editorStatus').textContent='Συμπλήρωσε τουλάχιστον έναν αριθμό.';return;}
+  const file=key==='documents'?form.elements.file.files[0]:null;
+  if(key==='documents'&&(!file&&!item.url||item.url&&!safeImage(item.url))){$('editorStatus').textContent='Επίλεξε αρχείο ή έγκυρο HTTPS σύνδεσμο / διαδρομή.';return;}
+  if(await persist(async candidate=>{if(file){item.fileData=await fileData(file);item.fileName=file.name;item.url='';}candidate[key].push(item);})){form.reset();if(key==='events')form.elements.date.value=selected||today;}
+ };
+}
+$('exportData').onclick=()=>{
+ if(!authenticated||working)return;
+ const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=node('a');
+ link.href=url;link.download='data.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $('editorStatus').textContent='Κατέβηκε το data.json. Ανέβασέ το στο GitHub για να φανούν οι αλλαγές σε όλους.';
+};
+$('refreshData').onclick=async()=>{
+ if(working||!authenticated)return;
+ if(hasDraft&&!confirm('Να αντικατασταθεί το τοπικό προσχέδιο με τα κοινά στοιχεία; Πρώτα κατέβασε το data.json αν θέλεις να κρατήσεις τις αλλαγές σου.'))return;
+ setBusy(true);
+ try{const latest=await fetchPublic();store.clear();publicSnapshot=JSON.stringify(latest);hasDraft=false;apply(latest);updateStatus();$('editorStatus').textContent='Φορτώθηκαν τα κοινά στοιχεία.';}
+ catch{$('editorStatus').textContent='Δεν φορτώθηκαν τα κοινά στοιχεία. Το προσχέδιό σου διατηρήθηκε.';}
+ finally{setBusy(false);}
+};
+render();syncConnection();initialize();
+
 </script>
 </body></html>
+
 
