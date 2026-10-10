@@ -52,7 +52,8 @@ main{position:relative;z-index:1}
 <dialog id="contactsDialog"><div class="row top"><h2>Χρήσιμα τηλέφωνα</h2><button class="icon" data-close="contactsDialog" aria-label="Κλείσιμο">×</button></div><p class="muted">Πατήστε έναν αριθμό για να καλέσετε.</p><table><thead><tr><th>ΟΝΟΜΑ</th><th>ΣΤΑΘΕΡΟ</th><th>ΚΙΝΗΤΟ</th><th>ΧΑΡΑΚΤΗΡΙΣΜΟΣ</th></tr></thead><tbody id="contactsList"></tbody></table></dialog>
 <dialog id="editorDialog" aria-labelledby="adminTitle"><div class="row top"><h2 id="adminTitle">Προσθήκη · Admin</h2><button class="icon" data-close="editorDialog" aria-label="Κλείσιμο">×</button></div>
 <section id="adminConnection"><p class="muted">Βάλε τον κωδικό διαχείρισης για να συνεχίσεις.</p><form id="connectForm"><label>Κωδικός<input id="adminPassword" type="password" autocomplete="current-password" inputmode="numeric" required></label><button class="action" style="margin-top:12px">Σύνδεση</button></form><p id="connectionStatus" class="muted" role="status"></p></section>
-<div id="adminTools" hidden><p class="tip">Οι αλλαγές αποθηκεύονται σε αυτή τη συσκευή ως προσχέδιο. Για να τις δουν όλοι, κατέβασε το data.json και ανέβασέ το στο GitHub.</p><div id="addChooser"><h3>Τι θέλεις να προσθέσεις;</h3><div class="admin-choices"><button type="button" class="choice" data-kind="events">Ημερολόγιο<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="contacts">Επαφή<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="notices">Ανακοίνωση<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="documents">Έγγραφο<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="settings">Εικόνα / στοιχεία<span aria-hidden="true">›</span></button></div></div><section class="admin-panel" id="panel-events" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Ημερολόγιο</h3><form id="eventForm"><label>Τίτλος<input name="title" required maxlength="120" placeholder="π.χ. Συντήρηση ανελκυστήρα"></label><div class="row"><label style="flex:1">Ημερομηνία<input name="date" type="date" required></label><label style="flex:1">Ώρα (προαιρετικά)<input name="time" type="time"></label></div><label>Λεπτομέρειες<input name="description" maxlength="250"></label><button class="action">Προσθήκη συμβάντος</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editEvents"></div></div></section><section class="admin-panel" id="panel-contacts" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Επαφή</h3><form id="contactForm"><label>Όνομα<input name="name" required maxlength="80"></label><label>Σταθερό<input name="landline" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Κινητό<input name="mobile" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Χαρακτηρισμός<input name="type" required maxlength="80" placeholder="π.χ. Υδραυλικός"></label><button class="action">Προσθήκη επαφής</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editContacts"></div></div></section><section class="admin-panel" id="panel-notices" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Ανακοίνωση</h3><form id="noticeForm"><label>Τίτλος<input name="title" required maxlength="120"></label><label>Κείμενο<textarea name="body" required maxlength="2000"></textarea></label><button class="action">Προσθήκη ανακοίνωσης</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editNotices"></div></div></section><section class="admin-panel" id="panel-documents" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Έγγραφο</h3><form id="documentForm"><label>Τίτλος εγγράφου<input name="title" required maxlength="120" placeholder="π.χ. Κανονισμός πολυκατοικίας"></label><label>Κατηγορία<input name="category" maxlength="80" placeholder="π.χ. Πρακτικά"></label><label>Αρχείο από τη συσκευή (έως 1 MB)<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx,.txt"></label><label>Σύνδεσμος ή διαδρομή αρχείου<input name="url" placeholder="π.χ. documents/kanonismos.pdf"></label><button class="action">Προσθήκη εγγράφου</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editDocuments"></div></div></section><section class="admin-panel" id="panel-settings" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Εικόνα / στοιχεία</h3><form id="settingsForm"><label>Τίτλος<input id="editName" required maxlength="80"></label><label>Υπότιτλος<input id="editSubtitle" maxlength="160"></label><label>Εικόνα: HTTPS link ή διαδρομή αρχείου<input id="editImage" placeholder="π.χ. building.jpg"></label><label>Ή φωτογραφία από τη συσκευή (έως 1 MB)<input id="imageFile" type="file" accept=".png,.jpg,.jpeg,.webp"></label><label>Λεζάντα<input id="editCaption" maxlength="200"></label><button class="action" style="margin-top:12px">Εφαρμογή στοιχείων</button></form></section><p class="muted" id="editorStatus" role="status"></p><section class="formsection publish-tools"><h3>Δημοσίευση αλλαγών</h3><button class="action" id="exportData" type="button">Λήψη data.json</button><a href="https://github.com/gardeliss/themidos/upload/main" target="_blank" rel="noopener noreferrer">Άνοιγμα GitHub για ανέβασμα ↗</a><p class="muted">Ανέβασε το αρχείο με όνομα <strong>data.json</strong> στη θέση του υπάρχοντος και πάτησε Commit changes. Αν το κινητό το ονομάσει data (1).json, μετονόμασέ το πρώτα σε data.json.</p><button class="secondary" id="refreshData" type="button">Φόρτωση κοινών στοιχείων</button><button class="secondary" id="disconnect" type="button">Αποσύνδεση</button></section></div></dialog>
+<div id="adminTools" hidden><p class="tip">Κάθε προσθήκη και αλλαγή αποθηκεύεται αυτόματα για όλους τους ενοίκους.</p><div id="addChooser"><h3>Τι θέλεις να προσθέσεις;</h3><div class="admin-choices"><button type="button" class="choice" data-kind="events">Ημερολόγιο<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="contacts">Επαφή<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="notices">Ανακοίνωση<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="documents">Έγγραφο<span aria-hidden="true">›</span></button><button type="button" class="choice" data-kind="settings">Εικόνα / στοιχεία<span aria-hidden="true">›</span></button></div></div><section class="admin-panel" id="panel-events" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Ημερολόγιο</h3><form id="eventForm"><label>Τίτλος<input name="title" required maxlength="120" placeholder="π.χ. Συντήρηση ανελκυστήρα"></label><div class="row"><label style="flex:1">Ημερομηνία<input name="date" type="date" required></label><label style="flex:1">Ώρα (προαιρετικά)<input name="time" type="time"></label></div><label>Λεπτομέρειες<input name="description" maxlength="250"></label><button class="action">Προσθήκη συμβάντος</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editEvents"></div></div></section><section class="admin-panel" id="panel-contacts" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Επαφή</h3><form id="contactForm"><label>Όνομα<input name="name" required maxlength="80"></label><label>Σταθερό<input name="landline" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Κινητό<input name="mobile" type="tel" pattern="[+0-9 ()-]{3,30}" maxlength="30"></label><label>Χαρακτηρισμός<input name="type" required maxlength="80" placeholder="π.χ. Υδραυλικός"></label><button class="action">Προσθήκη επαφής</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editContacts"></div></div></section><section class="admin-panel" id="panel-notices" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Ανακοίνωση</h3><form id="noticeForm"><label>Τίτλος<input name="title" required maxlength="120"></label><label>Κείμενο<textarea name="body" required maxlength="2000"></textarea></label><button class="action">Προσθήκη ανακοίνωσης</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editNotices"></div></div></section><section class="admin-panel" id="panel-documents" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Έγγραφο</h3><form id="documentForm"><label>Τίτλος εγγράφου<input name="title" required maxlength="120" placeholder="π.χ. Κανονισμός πολυκατοικίας"></label><label>Κατηγορία<input name="category" maxlength="80" placeholder="π.χ. Πρακτικά"></label><label>Αρχείο από τη συσκευή (έως 1 MB)<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx,.txt"></label><label>Σύνδεσμος ή διαδρομή αρχείου<input name="url" placeholder="π.χ. documents/kanonismos.pdf"></label><button class="action">Προσθήκη εγγράφου</button></form><div class="formsection"><h3>Υπάρχουσες εγγραφές</h3><div id="editDocuments"></div></div></section><section class="admin-panel" id="panel-settings" hidden><button type="button" class="back-choice">‹ Άλλη κατηγορία</button><h3>Εικόνα / στοιχεία</h3><form id="settingsForm"><label>Τίτλος<input id="editName" required maxlength="80"></label><label>Υπότιτλος<input id="editSubtitle" maxlength="160"></label><label>Εικόνα: HTTPS link ή διαδρομή αρχείου<input id="editImage" placeholder="π.χ. building.jpg"></label><label>Ή φωτογραφία από τη συσκευή (έως 1 MB)<input id="imageFile" type="file" accept=".png,.jpg,.jpeg,.webp"></label><label>Λεζάντα<input id="editCaption" maxlength="200"></label><button class="action" style="margin-top:12px">Εφαρμογή στοιχείων</button></form></section><p class="muted" id="editorStatus" role="status"></p><section class="formsection publish-tools"><button class="secondary" id="refreshData" type="button">Ανανέωση κοινών στοιχείων</button><button class="secondary" id="disconnect" type="button">Αποσύνδεση</button><details><summary>Αντίγραφο ασφαλείας</summary><button class="secondary" id="exportData" type="button">Λήψη αντιγράφου / προσχεδίου JSON</button><button class="secondary" id="restoreDraft" type="button" hidden>Επαναφορά τοπικού προσχεδίου</button><button class="action" id="publishDraft" type="button" hidden>Αποθήκευση προσχεδίου για όλους</button><p class="muted">Χρησιμοποίησε το προσχέδιο μόνο αν υπήρξε αποτυχία αποθήκευσης ή για προηγούμενες τοπικές αλλαγές.</p></details></section></div></dialog>
+<script src="firebase-store.js?v=20261010-live"></script>
 <script>
 'use strict';
 const data=JSON.parse(document.getElementById('site-data').textContent);
@@ -89,7 +90,10 @@ class DraftStore{
  clear(){this.storage.removeItem(DRAFT_KEY);}
 }
 let storage;try{storage=localStorage;}catch{storage={getItem(){return null;},setItem(){throw Error();},removeItem(){}};}
-const store=new DraftStore(storage);
+const localDrafts=new DraftStore(storage);
+const store=new FirebaseBuildingStore('https://themidos-3b0b2-default-rtdb.europe-west1.firebasedatabase.app');
+let ready=false,initializing=true,pendingDraft=null;
+function draftButtons(){$('restoreDraft').hidden=!pendingDraft;$('publishDraft').hidden=!hasDraft;}
 function syncConnection(){
  $('adminConnection').hidden=authenticated;$('adminTools').hidden=!authenticated;
 }
@@ -101,43 +105,41 @@ function editLists(){
 }
 function apply(value){for(const key of Object.keys(data))delete data[key];Object.assign(data,value);render();editLists();syncConnection();}
 function updateStatus(message){
- $('sharedStatus').textContent=message|| (hasDraft?'Τοπικό προσχέδιο · οι αλλαγές περιμένουν ανέβασμα στο GitHub.':'Κοινά στοιχεία πολυκατοικίας.');
+ $('sharedStatus').textContent=message||(hasDraft?'Τοπικό προσχέδιο · δεν έχει αποθηκευτεί για όλους.':'Κοινά στοιχεία πολυκατοικίας.');draftButtons();
  $('sharedStatus').classList.toggle('draft-note',hasDraft);
  $('demoBadge').textContent=hasDraft?'Τοπικό προσχέδιο':'Κοινή ενημέρωση';
 }
 function setBusy(value){
  working=value;
  for(const id of ['settingsForm','eventForm','contactForm','noticeForm','documentForm','connectForm'])for(const button of $(id).querySelectorAll('button'))button.disabled=value;
- $('exportData').disabled=value;$('refreshData').disabled=value;$('disconnect').disabled=value;
+ $('restoreDraft').disabled=value;$('publishDraft').disabled=value;$('exportData').disabled=value;$('refreshData').disabled=value;$('disconnect').disabled=value;
  for(const button of document.querySelectorAll('[data-kind],.back-choice'))button.disabled=value;
  editLists();
 }
 async function persist(update){
- if(working)return false;
+ if(working||initializing)return false;
  if(!authenticated){$('editorStatus').textContent='Βάλε πρώτα τον κωδικό διαχείρισης.';return false;}
- setBusy(true);
+ if(!ready){$('editorStatus').textContent='Δεν έχουν φορτωθεί τα κοινά στοιχεία. Πάτησε ανανέωση.';return false;}
+ setBusy(true);$('editorStatus').textContent='Αποθήκευση για όλους…';let candidate;
  try{
-  const candidate=structuredClone(data);await update(candidate);candidate.demo=false;
-  store.save(candidate);hasDraft=true;apply(candidate);updateStatus();
-  $('editorStatus').textContent='Αποθηκεύτηκε στη συσκευή. Κατέβασε το data.json για δημοσίευση σε όλους.';
-  return true;
- }catch(error){$('editorStatus').textContent=error.message;return false;}
- finally{setBusy(false);}
+  candidate=structuredClone(data);await update(candidate);candidate.demo=false;
+  const saved=await store.save(candidate);publicSnapshot=JSON.stringify(saved);hasDraft=false;pendingDraft=null;
+  try{localDrafts.clear();}catch{}apply(saved);updateStatus();
+  $('editorStatus').textContent='Αποθηκεύτηκε για όλους τους ενοίκους.';return true;
+ }catch(error){
+  if(candidate){try{localDrafts.save(candidate);pendingDraft={data:candidate,base:publicSnapshot};}catch{}}
+  draftButtons();$('editorStatus').textContent=error.message;return false;
+ }finally{setBusy(false);}
 }
-async function fetchPublic(){
- const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
- try{
-  const response=await fetch('./data.json?t='+Date.now(),{cache:'no-store',signal:controller.signal});
-  if(!response.ok)throw Error();const value=await response.json();if(!validData(value))throw Error();return value;
- }finally{clearTimeout(timer);}
-}
+async function fetchPublic(){return store.load();}
 async function initialize(){
- let latest;
- try{latest=await fetchPublic();publicSnapshot=JSON.stringify(latest);}catch{latest=structuredClone(data);}
- const draft=store.read();
- if(draft&&JSON.stringify(draft.data)===JSON.stringify(latest)){try{store.clear();}catch{}}
- else if(draft){hasDraft=true;apply(draft.data);updateStatus(draft.base&&publicSnapshot&&draft.base!==publicSnapshot?'Υπάρχουν νεότερα κοινά στοιχεία. Το τοπικό σου προσχέδιο διατηρήθηκε. Φόρτωσε τα κοινά στοιχεία πριν κάνεις νέες αλλαγές.':undefined);return;}
- apply(latest);updateStatus(publicSnapshot?undefined:'Δεν φορτώθηκαν τα νεότερα κοινά στοιχεία. Προβάλλεται η διαθέσιμη έκδοση.');
+ try{
+  const latest=await fetchPublic();publicSnapshot=JSON.stringify(latest);ready=true;
+  const draft=localDrafts.read();
+  if(draft&&FirebaseBuildingStore.canonical(draft.data)===FirebaseBuildingStore.canonical(latest)){try{localDrafts.clear();}catch{}}
+  else pendingDraft=draft;
+  apply(latest);updateStatus();
+ }catch(error){ready=false;updateStatus('Προβάλλεται η αποθηκευμένη έκδοση. '+error.message);}
 }
 function choose(kind){
  if(!authenticated)return;
@@ -207,21 +209,34 @@ for(const [id,key] of [['eventForm','events'],['contactForm','contacts'],['notic
 }
 $('exportData').onclick=()=>{
  if(!authenticated||working)return;
- const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=node('a');
+ const blob=new Blob([JSON.stringify(pendingDraft?.data||data,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=node('a');
  link.href=url;link.download='data.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- $('editorStatus').textContent='Κατέβηκε το data.json. Ανέβασέ το στο GitHub για να φανούν οι αλλαγές σε όλους.';
+ $('editorStatus').textContent='Κατέβηκε αντίγραφο ασφαλείας. Οι προσθήκες αποθηκεύονται αυτόματα στη βάση.';
 };
 $('refreshData').onclick=async()=>{
  if(working||!authenticated)return;
- if(hasDraft&&!confirm('Να αντικατασταθεί το τοπικό προσχέδιο με τα κοινά στοιχεία; Πρώτα κατέβασε το data.json αν θέλεις να κρατήσεις τις αλλαγές σου.'))return;
+ if((hasDraft||pendingDraft)&&!confirm('Να αντικατασταθεί το τοπικό προσχέδιο με τα κοινά στοιχεία; Μπορείς πρώτα να κατεβάσεις αντίγραφο ασφαλείας.'))return;
  setBusy(true);
- try{const latest=await fetchPublic();store.clear();publicSnapshot=JSON.stringify(latest);hasDraft=false;apply(latest);updateStatus();$('editorStatus').textContent='Φορτώθηκαν τα κοινά στοιχεία.';}
+ try{const latest=await fetchPublic();localDrafts.clear();publicSnapshot=JSON.stringify(latest);hasDraft=false;pendingDraft=null;ready=true;apply(latest);updateStatus();$('editorStatus').textContent='Φορτώθηκαν τα κοινά στοιχεία.';}
  catch{$('editorStatus').textContent='Δεν φορτώθηκαν τα κοινά στοιχεία. Το προσχέδιό σου διατηρήθηκε.';}
  finally{setBusy(false);}
 };
-render();syncConnection();initialize();
+$('restoreDraft').onclick=()=>{
+ if(!authenticated||working||!pendingDraft||!ready)return;
+ try{const base=JSON.parse(pendingDraft.base);store.snapshot=FirebaseBuildingStore.canonical(base);}catch{store.snapshot='unverified-draft';}
+ publicSnapshot=pendingDraft.base;hasDraft=true;apply(structuredClone(pendingDraft.data));updateStatus();
+ $('editorStatus').textContent='Επαναφέρθηκε το τοπικό προσχέδιο. Δεν έχει αποθηκευτεί για όλους.';
+};
+$('publishDraft').onclick=()=>{if(hasDraft)persist(()=>{});};
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden||working||initializing||hasDraft||$('editorDialog').open)return;
+ initializing=true;setBusy(true);initialize().finally(()=>{initializing=false;setBusy(false);});
+});
+render();syncConnection();setBusy(true);
+initialize().finally(()=>{initializing=false;setBusy(false);});
 
 </script>
 </body></html>
+
 
 
