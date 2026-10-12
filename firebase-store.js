@@ -41,6 +41,21 @@ function normalize(value){
    if(!optional.every(field=>item[field]===undefined||typeof item[field]==='string'))throw new Error('Τα κοινά στοιχεία δεν είναι έγκυρα.');
   }
  }
+ if(result.apartments==null)result.apartments=Array.from({length:10},(_,i)=>({id:String(i+1),label:'Διαμέρισμα '+(i+1),floor:'',status:'',owners:[],tenants:[]}));
+ else if(!Array.isArray(result.apartments)&&typeof result.apartments==='object'&&Object.keys(result.apartments).every(key=>/^\d+$/.test(key)))result.apartments=Object.keys(result.apartments).sort((a,b)=>Number(a)-Number(b)).map(key=>result.apartments[key]);
+ if(!Array.isArray(result.apartments)||result.apartments.length!==10)throw new Error('Χρειάζονται 10 διαμερίσματα.');
+ const ids=new Set();
+ for(const apartment of result.apartments){
+  if(!apartment||typeof apartment!=='object'||!['id','label','floor','status'].every(key=>typeof apartment[key]==='string')||!apartment.id||!apartment.label.trim()||ids.has(apartment.id)||!['','Ιδιοκατοίκηση','Μισθωμένο','Κενό'].includes(apartment.status))throw new Error('Τα στοιχεία διαμερίσματος δεν είναι έγκυρα.');
+  ids.add(apartment.id);
+  for(const key of ['owners','tenants']){
+   let people=apartment[key];
+   if(people==null)people=[];
+   else if(!Array.isArray(people)&&typeof people==='object'&&Object.keys(people).every(key=>/^\d+$/.test(key)))people=Object.keys(people).sort((a,b)=>Number(a)-Number(b)).map(index=>people[index]);
+   if(!Array.isArray(people)||!people.every(p=>p&&typeof p.name==='string'&&p.name.trim()&&(p.phone===undefined||typeof p.phone==='string')))throw new Error('Τα στοιχεία προσώπου δεν είναι έγκυρα.');
+   apartment[key]=people.map(p=>({...p,phone:p.phone||''}));
+  }
+ }
  return result;
 }
 class FirebaseBuildingStore{
@@ -82,4 +97,5 @@ class FirebaseBuildingStore{
 }
 if(typeof module!=='undefined'&&module.exports)module.exports=FirebaseBuildingStore;else root.FirebaseBuildingStore=FirebaseBuildingStore;
 })(globalThis);
+
 
